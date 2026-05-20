@@ -1,0 +1,198 @@
+/* Conteneur principal de la page */
+.page-container {
+  min-height: 100vh;
+  background-color: #111827;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f3f4f6;
+}
+
+/* Titre principal */
+.page-title {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  color: #eab308; /* Couleur Or d'Elden Ring */
+  margin-bottom: 2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Zone de recherche */
+.search-container {
+  margin-bottom: 3rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: #1f2937;
+  color: #f3f4f6;
+  border: 1px solid #374151;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #eab308;
+  box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.3);
+}
+
+/* Grille de cartes responsive */
+.boss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Carte de Boss individuelle */
+.boss-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #1f2937;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 2px solid #374151;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.boss-card:hover {
+  border-color: #eab308;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Style spécial si le boss est mort */
+.boss-card.killed {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  transform: scale(0.96);
+  border-color: #111827;
+}
+
+/* Conteneur de l'image (Fini l'image géante !) */
+.image-container {
+  height: 14rem;
+  width: 100%;
+  position: relative;
+  background-color: #0f172a;
+  border-bottom: 1px solid #374151;
+}
+
+.boss-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Force l'image à bien s'adapter sans déformer */
+}
+
+/* Overlay et Tampon Rouge "VAINCU" */
+.overlay-vaincu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp-vaincu {
+  color: #dc2626;
+  font-weight: 900;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 4px solid #dc2626;
+  padding: 0.25rem 1rem;
+  transform: rotate(-12deg);
+  background-color: rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+/* Infos textuelles de la carte */
+.card-content {
+  padding: 1.25rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.boss-name {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #f3f4f6;
+  margin: 0 0 0.35rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boss-region {
+  font-size: 0.85rem;
+  color: #ca8a04;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin: 0;
+}
+
+.hp-badge {
+  margin-top: 0.75rem;
+  display: inline-block;
+  background-color: #111827;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #374151;
+  color: #f87171;
+  font-weight: bold;
+  font-size: 0.85rem;
+  width: fit-content;
+}
+
+/* Boutons d'action pro */
+.btn-action {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-action.alive {
+  background-color: #7f1d1d;
+  color: #ffffff;
+}
+
+.btn-action.alive:hover {
+  background-color: #991b1b;
+}
+
+.btn-action.killed {
+  background-color: #4b5563;
+  color: #d1d5db;
+}
+
+.btn-action.killed:hover {
+  background-color: #6b7280;
+}
+
+.no-results {
+  text-align: center;
+  color: #9ca3af;
+  margin-top: 4rem;
+  font-size: 1.25rem;
+}
