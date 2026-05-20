@@ -1,71 +1,75 @@
 <div class="page-container">
+  <a routerLink="/" class="btn-back">← Accueil</a>
   <h1 class="page-title">Bestiaire de l'Entre-Terre</h1>
 
   <p class="boss-counter">
-    <span>{{ bosses.length }}</span> boss &bull; <span>{{ killedBossesIds.length }}</span> vaincu{{ killedBossesIds.length > 1 ? 's' : '' }}
+    <span>{{ filteredBosses.length }}</span> boss affiché{{ filteredBosses.length > 1 ? 's' : '' }}
+    &bull;
+    <span>{{ killedInFilter }}</span> / <span>{{ bosses.length }}</span> vaincus au total
   </p>
-  
+
   <div class="search-container">
-    <input 
-      type="text" 
-      [(ngModel)]="searchTerm" 
-      (input)="onSearch()" 
-      placeholder="Rechercher un boss à abattre..." 
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="Rechercher un boss à abattre..."
       class="search-input"
     >
   </div>
 
   <div class="content-wrapper">
-  <div class="filter-sidebar">
-    <button 
-      *ngFor="let region of regions"
-      (click)="filterByRegion(region.value)"
-      [ngClass]="{ 'active': selectedRegion === region.value }"
-      class="filter-btn">
-      {{ region.label }}
-    </button>
-  </div>
-  
-  <div class="boss-grid">
-    
-    <div *ngFor="let boss of filteredBosses" 
-         [ngClass]="{ 'killed': boss.isKilled }"
-         class="boss-card">
-      
-      <div class="image-container">
-        <ng-container *ngIf="boss.image; else placeholder">
-          <img [src]="boss.image" [alt]="boss.name" class="boss-image">
-        </ng-container>
-        <ng-template #placeholder>
-          <div class="image-placeholder">{{ boss.name }}</div>
-        </ng-template>
-        
-        <div *ngIf="boss.isKilled" class="overlay-vaincu">
-          <span class="stamp-vaincu">Vaincu</span>
-        </div>
-      </div>
-
-      <div class="card-content">
-        <div>
-          <h2 class="boss-name">{{ boss.name }}</h2>
-          <p class="boss-region">{{ boss.region }}</p>
-          <div class="hp-badge">
-            HP: {{ boss.healthPoints || '???' }}
-          </div>
-        </div>
-        
-        <button (click)="toggleKilled(boss)"
-                [ngClass]="boss.isKilled ? 'killed' : 'alive'"
-                class="btn-action">
-          {{ boss.isKilled ? 'Ressusciter' : 'Déclarer vaincu' }}
-        </button>
-      </div>
-
+    <div class="filter-sidebar">
+      <button
+        *ngFor="let region of regions"
+        (click)="filterByRegion(region.value)"
+        [ngClass]="{ 'active': selectedRegion === region.value }"
+        class="filter-btn">
+        {{ region.label }}
+      </button>
     </div>
 
-  </div>
+    <div class="boss-grid-wrapper">
+      <div class="boss-grid">
+        <div *ngFor="let boss of filteredBosses"
+             [ngClass]="{ 'killed': boss.isKilled }"
+             class="boss-card">
 
-  <div *ngIf="filteredBosses.length === 0" class="no-results">
-    Aucun boss trouvé...
+          <div class="image-container">
+            <ng-container *ngIf="boss.image; else placeholder">
+              <img [src]="boss.image" [alt]="boss.name" class="boss-image">
+            </ng-container>
+            <ng-template #placeholder>
+              <div class="image-placeholder">{{ boss.name }}</div>
+            </ng-template>
+
+            <div *ngIf="boss.isKilled" class="overlay-vaincu">
+              <span class="stamp-vaincu">Vaincu</span>
+            </div>
+          </div>
+
+          <div class="card-content">
+            <div>
+              <h2 class="boss-name">{{ boss.name }}</h2>
+              <p class="boss-region">{{ boss.region }}</p>
+              <div class="hp-badge">
+                HP: {{ boss.healthPoints || '???' }}
+              </div>
+            </div>
+
+            <button (click)="toggleKilled(boss)"
+                    [ngClass]="boss.isKilled ? 'killed' : 'alive'"
+                    class="btn-action">
+              {{ boss.isKilled ? 'Ressusciter' : 'Déclarer vaincu' }}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="filteredBosses.length === 0" class="no-results">
+        Aucun boss trouvé...
+      </div>
+    </div>
   </div>
 </div>

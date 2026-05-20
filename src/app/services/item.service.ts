@@ -1,24 +1,24 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, expand, reduce, EMPTY } from 'rxjs';
-import { Boss, ApiResponse } from '../models/boss.model';
+import { Item, ItemApiResponse } from '../models/boss.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BossService {
+export class ItemService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://eldenring.fanapis.com/api/bosses';
+  private apiUrl = 'https://eldenring.fanapis.com/api/items';
   private pageSize = 50;
 
-  getAllBosses(): Observable<Boss[]> {
+  getAllItems(): Observable<Item[]> {
     const fetchPage = (page: number) =>
-      this.http.get<ApiResponse>(`${this.apiUrl}?limit=${this.pageSize}&page=${page}`);
+      this.http.get<ItemApiResponse>(`${this.apiUrl}?limit=${this.pageSize}&page=${page}`);
 
     let currentPage = 0;
 
     return fetchPage(0).pipe(
-      expand((response: ApiResponse) => {
+      expand((response: ItemApiResponse) => {
         const fetched = (currentPage + 1) * this.pageSize;
         if (fetched < response.total) {
           currentPage++;
@@ -26,8 +26,8 @@ export class BossService {
         }
         return EMPTY;
       }),
-      reduce((allBosses: Boss[], response: ApiResponse) => {
-        return [...allBosses, ...response.data];
+      reduce((allItems: Item[], response: ItemApiResponse) => {
+        return [...allItems, ...response.data];
       }, [])
     );
   }

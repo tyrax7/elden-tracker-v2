@@ -1,7 +1,24 @@
 <div class="home-container">
   <div class="home-content">
-    <h1 class="home-title">Bestiaire de l'Entre-Terre</h1>
-    <p class="home-subtitle">106 créatures vous attendent</p>
-    <button class="btn-enter" routerLink="/bosses">Continuer</button>
+    <h1 class="home-title">Annales de l'Entre-Terre</h1>
+    <p class="home-subtitle">Que souhaitez-vous consulter ?</p>
+
+    <div class="home-cards">
+
+      <div class="home-card" routerLink="/bosses">
+        <div class="card-icon">☠</div>
+        <h2 class="card-title">Bestiaire</h2>
+        <p class="card-desc">Les créatures et gardiens des Terres Intermédiaires</p>
+        <span class="card-cta">Explorer</span>
+      </div>
+
+      <div class="home-card items-card" routerLink="/items">
+        <div class="card-icon">✦</div>
+        <h2 class="card-title">Inventaire</h2>
+        <p class="card-desc">Les objets, reliques et consommables disséminés dans le monde</p>
+        <span class="card-cta">Explorer</span>
+      </div>
+
+    </div>
   </div>
 </div>

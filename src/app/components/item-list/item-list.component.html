@@ -1,0 +1,73 @@
+<div class="page-container">
+  <a routerLink="/" class="btn-back">← Accueil</a>
+  <h1 class="page-title">Trésors de l'Entre-Terre</h1>
+
+  <p class="item-counter">
+    <span>{{ filteredItems.length }}</span> objet{{ filteredItems.length > 1 ? 's' : '' }} affiché{{ filteredItems.length > 1 ? 's' : '' }}
+    &bull;
+    <span>{{ foundInFilter }}</span> / <span>{{ items.length }}</span> trouvés au total
+  </p>
+
+  <div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="Rechercher un objet..."
+      class="search-input"
+    >
+  </div>
+
+  <div class="content-wrapper">
+    <div class="filter-sidebar">
+      <button
+        *ngFor="let type of types"
+        (click)="filterByType(type.value)"
+        [ngClass]="{ 'active': selectedType === type.value }"
+        class="filter-btn">
+        {{ type.label }}
+      </button>
+    </div>
+
+    <div class="item-grid-wrapper">
+      <div class="item-grid">
+        <div *ngFor="let item of filteredItems"
+             [ngClass]="{ 'found': item.isFound }"
+             class="item-card">
+
+          <div class="image-container">
+            <ng-container *ngIf="item.image; else placeholder">
+              <img [src]="item.image" [alt]="item.name" class="item-image">
+            </ng-container>
+            <ng-template #placeholder>
+              <div class="image-placeholder">{{ item.name }}</div>
+            </ng-template>
+
+            <div *ngIf="item.isFound" class="overlay-found">
+              <span class="stamp-found">Obtenu</span>
+            </div>
+          </div>
+
+          <div class="card-content">
+            <div>
+              <h2 class="item-name">{{ item.name }}</h2>
+              <p class="item-type">{{ item.type }}</p>
+              <p class="item-effect" *ngIf="item.effect">{{ item.effect }}</p>
+            </div>
+
+            <button (click)="toggleFound(item)"
+                    [ngClass]="item.isFound ? 'found' : 'missing'"
+                    class="btn-action">
+              {{ item.isFound ? 'Retirer' : 'Marquer obtenu' }}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="filteredItems.length === 0" class="no-results">
+        Aucun objet trouvé...
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,8 +3,7 @@
 .home-container {
   min-height: 100vh;
   background-color: #0e0e16;
-  background-image:
-    linear-gradient(180deg, #000000 0%, #0e0e16 40%, #0e0e16 60%, #000000 100%);
+  background-image: linear-gradient(180deg, #000000 0%, #0e0e16 40%, #0e0e16 60%, #000000 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,12 +15,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .home-title {
   font-family: 'Cinzel', serif;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 900;
   color: #f0d060;
   letter-spacing: 0.3em;
@@ -41,56 +40,134 @@
 
 .home-subtitle {
   font-family: 'Cinzel', serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #7a7060;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+  margin-top: -0.5rem;
 }
 
-.btn-enter {
+/* ── Cartes ── */
+.home-cards {
+  display: flex;
+  gap: 2.5rem;
   margin-top: 1rem;
-  padding: 1rem 3rem;
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #f0d060;
-  background: transparent;
-  border: 1px solid #c09040;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
 }
 
-.btn-enter::before,
-.btn-enter::after {
+.home-card {
+  width: 260px;
+  padding: 2.5rem 2rem;
+  background: rgba(22, 22, 32, 0.8);
+  border: 1px solid #c09040;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.35s ease;
+}
+
+/* coins dorés */
+.home-card::before,
+.home-card::after {
   content: '';
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   transition: all 0.3s;
 }
-.btn-enter::before {
+.home-card::before {
   top: -1px; left: -1px;
   border-top: 2px solid #f0d060;
   border-left: 2px solid #f0d060;
 }
-.btn-enter::after {
+.home-card::after {
   bottom: -1px; right: -1px;
   border-bottom: 2px solid #f0d060;
   border-right: 2px solid #f0d060;
 }
 
-.btn-enter:hover {
-  background: rgba(240,208,96,0.08);
-  color: #fff;
+.home-card:hover {
+  background: rgba(240,208,96,0.06);
   border-color: #f0d060;
-  box-shadow: 0 0 30px rgba(240,208,96,0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 0 50px rgba(240,208,96,0.1), 0 30px 60px rgba(0,0,0,0.6);
 }
 
-.btn-enter:hover::before,
-.btn-enter:hover::after {
-  width: 18px;
-  height: 18px;
+.home-card:hover::before,
+.home-card:hover::after {
+  width: 24px;
+  height: 24px;
+}
+
+/* carte items — thème argenté */
+.items-card {
+  border-color: #607080;
+}
+.items-card::before { border-color: #a8b4c0; }
+.items-card::after  { border-color: #a8b4c0; }
+
+.items-card:hover {
+  background: rgba(168,180,192,0.06);
+  border-color: #a8b4c0;
+  box-shadow: 0 0 50px rgba(168,180,192,0.08), 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.items-card:hover::before,
+.items-card:hover::after {
+  border-color: #d0dce8;
+}
+
+/* ── Contenu carte ── */
+.card-icon {
+  font-size: 2.2rem;
+  color: #f0d060;
+  text-shadow: 0 0 20px rgba(240,208,96,0.5);
+  line-height: 1;
+}
+
+.items-card .card-icon {
+  color: #a8b4c0;
+  text-shadow: 0 0 20px rgba(168,180,192,0.4);
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.card-desc {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.9rem;
+  color: #7a7060;
+  text-align: center;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.card-cta {
+  margin-top: 0.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #c09040;
+  transition: color 0.25s;
+}
+
+.home-card:hover .card-cta {
+  color: #f0d060;
+}
+
+.items-card .card-cta {
+  color: #607080;
+}
+
+.items-card:hover .card-cta {
+  color: #d0dce8;
 }
