@@ -1,46 +1,62 @@
-<div class="min-h-screen bg-gray-900 p-8 font-sans">
-  <h1 class="text-5xl font-bold text-center text-yellow-500 mb-8 tracking-widest uppercase">Bestiaire de l'Entre-Terre</h1>
+<div class="page-container">
+  <h1 class="page-title">Bestiaire de l'Entre-Terre</h1>
+
+  <p class="boss-counter">
+    <span>{{ bosses.length }}</span> boss &bull; <span>{{ killedBossesIds.length }}</span> vaincu{{ killedBossesIds.length > 1 ? 's' : '' }}
+  </p>
   
-  <div class="mb-12 max-w-md mx-auto">
+  <div class="search-container">
     <input 
       type="text" 
       [(ngModel)]="searchTerm" 
       (input)="onSearch()" 
       placeholder="Rechercher un boss à abattre..." 
-      class="w-full px-4 py-3 rounded-lg bg-gray-800 text-gray-100 border border-gray-700 focus:outline-none focus:border-yellow-500 transition-all shadow-lg"
+      class="search-input"
     >
   </div>
+
+  <div class="content-wrapper">
+  <div class="filter-sidebar">
+    <button 
+      *ngFor="let region of regions"
+      (click)="filterByRegion(region.value)"
+      [ngClass]="{ 'active': selectedRegion === region.value }"
+      class="filter-btn">
+      {{ region.label }}
+    </button>
+  </div>
   
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+  <div class="boss-grid">
     
     <div *ngFor="let boss of filteredBosses" 
-         [ngClass]="boss.isKilled ? 'opacity-60 grayscale scale-95 border-gray-800' : 'border-gray-700 hover:border-yellow-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-yellow-900/20'"
-         class="flex flex-col bg-gray-800 rounded-xl overflow-hidden border-2 transition-all duration-300 relative">
+         [ngClass]="{ 'killed': boss.isKilled }"
+         class="boss-card">
       
-      <div class="h-56 w-full relative bg-gray-900 border-b border-gray-700">
-        <img [src]="boss.image || 'https://via.placeholder.com/400x200/1f2937/fbbf24?text=Elden+Ring'" 
-             [alt]="boss.name" 
-             class="w-full h-full object-cover">
-             
-        <div *ngIf="boss.isKilled" class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <span class="text-red-600 font-black text-4xl tracking-widest uppercase border-4 border-red-600 px-4 py-2 transform -rotate-12 backdrop-blur-sm">
-            Vaincu
-          </span>
+      <div class="image-container">
+        <ng-container *ngIf="boss.image; else placeholder">
+          <img [src]="boss.image" [alt]="boss.name" class="boss-image">
+        </ng-container>
+        <ng-template #placeholder>
+          <div class="image-placeholder">{{ boss.name }}</div>
+        </ng-template>
+        
+        <div *ngIf="boss.isKilled" class="overlay-vaincu">
+          <span class="stamp-vaincu">Vaincu</span>
         </div>
       </div>
-      
-      <div class="p-5 flex-grow flex flex-col justify-between">
+
+      <div class="card-content">
         <div>
-          <h2 class="text-2xl font-bold text-gray-100 mb-1">{{ boss.name }}</h2>
-          <p class="text-sm text-yellow-600/80 uppercase tracking-wide font-semibold">{{ boss.region }}</p>
-          <div class="mt-4 inline-block bg-gray-900 px-3 py-1 rounded border border-gray-700">
-            <span class="text-red-500 font-bold text-sm">HP: {{ boss.healthPoints || '???' }}</span>
+          <h2 class="boss-name">{{ boss.name }}</h2>
+          <p class="boss-region">{{ boss.region }}</p>
+          <div class="hp-badge">
+            HP: {{ boss.healthPoints || '???' }}
           </div>
         </div>
         
         <button (click)="toggleKilled(boss)"
-                [ngClass]="boss.isKilled ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' : 'bg-red-900 hover:bg-red-800 text-white'"
-                class="mt-6 w-full py-3 rounded-lg font-bold transition-colors duration-200 border border-transparent shadow-lg">
+                [ngClass]="boss.isKilled ? 'killed' : 'alive'"
+                class="btn-action">
           {{ boss.isKilled ? 'Ressusciter' : 'Déclarer vaincu' }}
         </button>
       </div>
@@ -49,7 +65,7 @@
 
   </div>
 
-  <div *ngIf="filteredBosses.length === 0" class="text-center text-gray-400 mt-12 text-xl">
+  <div *ngIf="filteredBosses.length === 0" class="no-results">
     Aucun boss trouvé...
   </div>
 </div>

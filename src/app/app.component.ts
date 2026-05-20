@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { BossListComponent } from './components/boss-list/boss-list.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BossListComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
