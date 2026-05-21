@@ -1,59 +1,47 @@
-# EldenTrackerV2
+🗡️ Elden Tracker v2
+Tracker de progression pour Elden Ring — suivez vos boss vaincus et objets collectés à travers les Terres Intermédiaires.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+Projet Angular déployé sur Vercel.
 
-## Development server
-
-To start a local development server, run:
-
-```bash
+Fonctionnalités
+Bestiaire — liste de tous les boss du jeu avec image, région et points de vie. Marquez-les comme vaincus au fur et à mesure.
+Inventaire — liste de tous les objets du jeu avec type et effet. Marquez-les comme obtenus.
+Filtres par région / type — filtrez le contenu par zone ou catégorie via la sidebar.
+Recherche — barre de recherche en temps réel sur les noms.
+Compteur de progression — affiche le nombre d'éléments affichés et le total vaincu/obtenu.
+Persistance locale — la progression est sauvegardée dans le localStorage du navigateur. Elle survit à la fermeture de la page et est propre à chaque utilisateur.
+Stack
+Angular 17+ — framework principal (standalone components)
+Elden Ring Fan API — source des données (boss, items)
+Vercel — hébergement
+Installation
+bash
+git clone https://github.com/tyrax7/elden-tracker-v2.git
+cd elden-tracker-v2
+npm install
 ng serve
-```
+L'application sera disponible sur http://localhost:4200.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Déploiement sur Vercel
+bash
+npm install -g vercel
+vercel
+Ou connectez le repo GitHub directement depuis le dashboard Vercel pour un déploiement automatique à chaque push.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Structure du projet
+src/app/
+├── components/
+│   ├── home/           # Page d'accueil avec les deux entrées
+│   ├── boss-list/      # Page Bestiaire
+│   └── item-list/      # Page Inventaire
+├── models/
+│   └── boss.model.ts   # Interfaces Boss, Item, ApiResponse
+└── services/
+    ├── boss.service.ts  # Récupération paginée des boss
+    ├── boss.resolver.ts # Chargement des boss avant navigation
+    ├── item.service.ts  # Récupération paginée des items
+    └── item.resolver.ts # Chargement des items avant navigation
+Notes
+Les données sont chargées via un Resolver Angular — la page n'apparaît qu'une fois les données prêtes, évitant tout flash de contenu vide.
+La pagination est gérée automatiquement côté service pour récupérer l'intégralité des données au-delà de la limite de 100 résultats de l'API.
+La progression de chaque utilisateur est stockée localement dans son navigateur — deux joueurs sur le même site ont chacun leur propre suivi indépendant.
