@@ -1,59 +1,17 @@
-# EldenTrackerV2
+🗡️ Elden Tracker v2
+Tracker de progression pour Elden Ring — suivez vos boss vaincus et objets collectés à travers les Terres Intermédiaires.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+Projet Angular déployé sur Vercel.
 
-## Development server
+Fonctionnalités
 
-To start a local development server, run:
+Bestiaire — liste de tous les boss du jeu avec image, région et points de vie. Marquez-les comme vaincus au fur et à mesure.
 
-```bash
-ng serve
-```
+Inventaire — liste de tous les objets du jeu avec type et effet. Marquez-les comme obtenus.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Filtres par région / type — filtrez le contenu par zone ou catégorie via la sidebar.
 
-## Code scaffolding
+Recherche — barre de recherche en temps réel sur les noms.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Compteur de progression — affiche le nombre d'éléments affichés et le total vaincu/obtenu.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
