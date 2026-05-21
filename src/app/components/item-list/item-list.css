@@ -411,19 +411,49 @@
   display: inline-block;
   font-family: 'Cinzel', serif;
   font-size: 0.68rem;
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: #f0d060;
   text-decoration: none;
-  border: 1px solid #2a2a3a;
-  padding: 0.45rem 1rem;
+  border: 1px solid #c09040;
+  padding: 0.5rem 1.2rem;
   margin-bottom: 2rem;
-  transition: all 0.25s;
+  transition: all 0.3s ease;
   border-radius: 2px;
+  position: relative;
+  text-shadow: 0 0 12px rgba(240,208,96,0.6);
+}
+
+.btn-back::before,
+.btn-back::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  transition: all 0.3s;
+}
+.btn-back::before {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+.btn-back::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
 }
 
 .btn-back:hover {
-  color: var(--gold);
-  border-color: var(--gold-dim);
-  background: rgba(240,208,96,0.05);
+  color: #fff;
+  border-color: var(--gold);
+  background: rgba(240,208,96,0.08);
+  box-shadow: 0 0 20px rgba(240,208,96,0.15);
+  text-shadow: 0 0 15px rgba(240,208,96,0.7);
+}
+
+.btn-back:hover::before,
+.btn-back:hover::after {
+  width: 14px;
+  height: 14px;
 }
